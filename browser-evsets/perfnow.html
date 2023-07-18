@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Cache Eviction Sets</title>
+</head>
+
+<body>
+    <h1>Amplify with performance.now</h1>
+    <form id="config" action="#">
+        <label>Blocks: </label><input type="number" name="b" value="7200" min="0"><br>
+        <label>Associativity: </label><input type="number" name="assoc" value="16" min="4"><br>
+        <label>Victim: </label><input type="number" name="victim" value="0" min="0" max="4096"><br>
+        <label>Offset: </label><input type="number" name="offset" value="63" min="0" max="64"><br>
+        <label>Stride: </label><input type="number" name="stride" value="4096" min="64" step="64"><br>
+        <label>Number of sets: </label><input type="number" name="limit" value="1" min="0" step="1"><br>
+
+        <input type="radio" id="single" name="run" value="single" checked>
+        <label for="single">Single run</label><br>
+        <input type="radio" id="hundo" name="run" value="hundo">
+        <label for="hundo">X iterations</label><br>
+        <input type="radio" id="rando" name="run" value="rando">
+        <label for="rando">X iterations with randomized targets</label><br>
+
+        X: <input type="number" id="x" value="5">
+        <p>
+            <input type="button" id="clear" value="Clear">
+        </p>
+    </form>
+    <button id="perfstart">Start</button>
+    <hr>
+    <h3>log:</h3>
+    <code id="output" style="display:block; width:80%; word-wrap:break-word;"></code>
+    <script>
+        function getRandomInt(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
+        }
+
+        function randomizeVictim() {
+            document.getElementById('config').victim.value = getRandomInt(0, 4096 + 1);
+        }
+
+        function log(...s) {
+            output.innerText += s + '\n';
+        }
+
+        function clearLog() {
+            output.innerText = '';
+        }
+
+        function getConf() {
+            let f = document.getElementById('config');
+            let b = parseInt(f.b.value), victim = parseInt(f.victim.value), offset = parseInt(f.offset.value), assoc = parseInt(f.assoc.value), stride = parseInt(f.stride.value), limit = parseInt(f.limit.value);
+            return {
+                B: isNaN(b) ? 6000 : b,
+                ASSOC: isNaN(assoc) ? 16 : assoc,
+                VICTIM: isNaN(victim) ? 4096 : victim,
+                OFFSET: isNaN(offset) ? 63 : offset,
+                STRIDE: isNaN(stride) ? 4096 : stride,
+                FINDALL: true,
+                LIMIT: limit,
+            };
+        }
+
+        randomizeVictim();
+        document.getElementById("clear").onclick = clearLog();
+    </script>
+    <script src="./main-perfnow.js" type="module"></script>
+</body>
+
+</html>
