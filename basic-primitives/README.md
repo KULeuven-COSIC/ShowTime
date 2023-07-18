@@ -3,15 +3,15 @@
 This folder is a testing ground for some of the main basic primitives of the paper.
 If you want to port a PoC to another machine, you may want to start here.
 
-# | Event | Convert | Amplify | Paper Sections |
-:-----------:|:---------:|:---------:|:---------:|:----------------:|
-1 | L1 Eviction | / | L1 PLRU | Sec 4.1 |
-2 | L1 Reordering | / | L1 PLRU | Sec 4.1 |
-3 | LLC Presence | Back-Invalidation | L1 PLRU | Sec 4.1 and 5.1|
-4 | LLC Presence | Time to Order (to L1 Reordering)| L1 PLRU | Sec 4.1 and 5.2 |
-4 | LLC Presence | Time to Order Repeatable (to L1 Reordering)| L1 PLRU | Sec 4.1 and 5.2 |
-5 | LLC Presence | / | Prefetch | Sec 4.2 |
-6 | L1 Presence | Time to Order (to LLC Presence) | Prefetch | Sec 4.2 and 5.2|
+| # | Event | Convert | Amplify | Paper Sections |
+| :---: | :---: | :---: | :---: | :---: |
+| 1 | L1 Eviction | / | L1 PLRU | Sec 4.1 |
+| 2 | L1 Reordering | / | L1 PLRU | Sec 4.1 |
+| 3 | LLC Presence | Back-Invalidation | L1 PLRU | Sec 4.1 and 5.1|
+| 4 | LLC Presence | Time to Order (to L1 Reordering)| L1 PLRU | Sec 4.1 and 5.2 |
+| 5 | LLC Presence | Time to Order Repeatable (to L1 Reordering)| L1 PLRU | Sec 4.1 and 5.2 |
+| 6 | LLC Presence | / | Prefetch | Sec 4.2 |
+| 7 | L1 Presence | Time to Order (to LLC Presence) | Prefetch | Sec 4.2 and 5.2|
 
 ## Configuration
 - Ensure that the global configuration parameters are [set correctly](../utils/README.md).
